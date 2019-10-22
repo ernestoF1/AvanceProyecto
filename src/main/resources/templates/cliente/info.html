@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<h1>Informacion de Cliente</h1>
+
+		<div class="card text-center">
+			<div class="card-header">Compra de productos</div>
+			<div class="card-body">
+
+				<div th:if="${dangerDel}" class="alert alert-danger" role="alert">
+					<span th:text="${dangerDel}"></span>
+				</div>
+
+
+				<form>
+					<div class="form-group row">
+						<label for="nombre" class="col-sm-2 col-form-label">Nombre
+							de Cliente :</label>
+						<div class="col-sm-10">
+							<input type="text" readonly th:value="${cliente.nombre}"
+								class="form-control-plaintext">
+						</div>
+					</div>
+
+
+				</form>
+
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+						    <th scope="col">Codigo</th>
+							<th scope="col">Fecha registro</th>
+							<th scope="col">Fecha envio</th>
+							
+							<th scope="col">Categoria</th>
+							<th scope="col">Producto nombre</th>
+							<th scope="col">Modelo</th>
+							<th scope="col">Producto precio</th>
+							<th scope="col">Tipo Pago</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody th:each="venta: ${cliente.lista_venta}">
+						<tr>
+							<th scope="row" th:text="${venta.id}">1</th>
+							<td th:text="${venta.fecha_registro}">Mark</td>
+							<td th:text="${venta.fecha_envio}">Mark</td>
+							<td th:text="${venta.producto.modelo.categoria.nombre}">Otto</td>
+							<td th:text="${venta.producto.nombre}">Otto</td>
+							<td th:text="${venta.producto.modelo.nombre}">Otto</td>
+							<td th:text="${venta.producto.precio}">Otto</td>
+							<td th:text="${venta.tipoPago.nombre}">Otto</td>
+						    
+						</tr>
+					</tbody>
+					
+					
+					
+					
+				</table>
+
+
+
+			</div>
+			<div class="card-footer text-muted">
+				<a th:href="@{/cliente}" class="btn btn-success"><i
+					class="fas fa-file-alt"></i> Ver Cliente</a> <a
+					th:href="@{'/cliente/' + ${cliente.id} + '/nuevaventa/'}"
+					class="btn btn-primary"> <i class="fas fa-file-alt"></i> Nueva
+					venta
+				</a>
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>
